@@ -20,7 +20,7 @@ module.exports = function (ctx) {
     supportIE: false,
     build: {
       scopeHoisting: true,
-      // vueRouterMode: 'history',
+      vueRouterMode: 'history',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
@@ -39,11 +39,11 @@ module.exports = function (ctx) {
       // port: 8080,
       open: true // opens browser window automatically
     },
-    // framework: 'all' --- includes everything; for dev only!
     framework: {
       components: [
         'QLayout',
         'QLayoutHeader',
+        'QLayoutFooter',
         'QLayoutDrawer',
         'QPageContainer',
         'QPage',
@@ -51,24 +51,69 @@ module.exports = function (ctx) {
         'QToolbarTitle',
         'QBtn',
         'QIcon',
+        'QItem',
+        'QItemTile',
+        'QItemMain',
+        'QItemSide',
+        'QField',
+        'QInput',
+        'QSelect',
+        'QCard',
+        'QCardTitle',
+        'QCardMain',
+        'QCardSeparator',
+        'QCardActions',
+        'QCardMedia',
+        'QModal',
+        'QWindowResizeObservable',
+        'QDatetime',
+        'QSpinnerBars',
+        'QStepper',
+        'QStep',
+        'QStepperNavigation',
         'QList',
         'QListHeader',
-        'QItem',
-        'QItemMain',
-        'QItemSide'
+        'QItemSeparator',
+        'QCollapsible',
+        'QPopover',
+        'QInnerLoading',
+        'QPagination',
+        'QCheckbox',
+        'QSpinnerTail',
+        'QModalLayout',
+        'QBtnToggle',
+        'QAlert',
+        'QProgress',
+        'QCarousel',
+        'QCarouselSlide',
+        'QCarouselControl',
+        'QRadio',
+        'QTooltip',
+        'QTabs',
+        'QTab',
+        'QTabPane'
       ],
       directives: [
-        'Ripple'
+        'Ripple',
+        'CloseOverlay'
       ],
       // Quasar plugins
       plugins: [
-        'Notify'
-      ]
-      // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
-      // i18n: 'de' // Quasar language
+        'Notify',
+        'LocalStorage',
+        'Loading',
+        'Dialog',
+        'Screen'
+      ],
+      i18n: 'pt-br'
     },
     // animations: 'all' --- includes all animations
-    animations: [],
+    animations: [
+      'fadeInDown',
+      'fadeOutUp',
+      'fadeIn',
+      'fadeOut'
+    ],
     ssr: {
       pwa: false
     },
