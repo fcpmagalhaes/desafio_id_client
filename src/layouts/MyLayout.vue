@@ -2,8 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-layout-header>
       <q-toolbar
-        color="primary"
-        :glossy="$q.theme === 'mat'"
+        color=black
         :inverted="$q.theme === 'ios'"
       >
         <q-btn
@@ -17,8 +16,8 @@
         </q-btn>
 
         <q-toolbar-title>
-          Quasar App
-          <div slot="subtitle">Running on Quasar v{{ $q.version }}</div>
+          <img src="~/src/assets/logo-id.png"> Desafio Ignição Digital
+          <div slot="subtitle">Developer by: Felipe C P Magalhães</div>
         </q-toolbar-title>
       </q-toolbar>
     </q-layout-header>
@@ -71,4 +70,7 @@ export default {
 </script>
 
 <style lang="stylus">
+  .q-toolbar-title img
+    width: 20px
+    margin-top: 5px
 </style>

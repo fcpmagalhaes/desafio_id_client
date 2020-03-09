@@ -16,7 +16,6 @@ export const setClients = ({ commit }) => {
 
 export const setClient = ({ commit }, id) => {
   return new Promise((resolve, reject) => {
-    console.log('id', id)
     Vue.prototype.$axios.get(`${process.env.API}/v1/clientes/${id}`)
       .then((res) => {
         commit('SET_CLIENT', res.data.data)
@@ -41,9 +40,9 @@ export const addClient = ({ commit }, newClient) => {
   })
 }
 
-export const updateClient = ({ commit }, id, client) => {
+export const updateClient = ({ commit }, clientPayload) => {
   return new Promise((resolve, reject) => {
-    Vue.prototype.$axios.put(`${process.env.API}/v1/clientes/${id}`, { client })
+    Vue.prototype.$axios.put(`${process.env.API}/v1/clientes/${clientPayload.id}`, clientPayload.data)
       .then((res) => {
         resolve(res.data.data)
       })
@@ -56,7 +55,7 @@ export const updateClient = ({ commit }, id, client) => {
 
 export const deleteClient = ({ commit }, id) => {
   return new Promise((resolve, reject) => {
-    Vue.prototype.$axios.del(`${process.env.API}/v1/clientes/${id}`)
+    Vue.prototype.$axios.delete(`${process.env.API}/v1/clientes/${id}`)
       .then((res) => {
         resolve(res.data.data)
       })

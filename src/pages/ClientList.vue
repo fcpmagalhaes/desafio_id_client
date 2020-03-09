@@ -1,5 +1,5 @@
 <template>
-  <q-page class="container q-pa-xs">
+  <q-page class="container q-ma-lg">
     <h3>Lista de Clientes</h3>
 
     <div class="row gutter-md q-pa-md">
@@ -14,7 +14,7 @@
                     <q-item v-close-overlay @click.native="editClient(client.id)">
                       <q-item-main label="Editar" />
                     </q-item>
-                    <q-item v-close-overlay @click.native="editClient(client.id)">
+                    <q-item v-close-overlay @click.native="deleteClient(client.id)">
                       <q-item-main label="Excluir" />
                     </q-item>
                   </q-list>
@@ -22,12 +22,16 @@
               </q-btn>
             </q-card-title>
             <q-card-separator />
-            <q-card-actions v-for="(tag, index) in tagsList" :key="index">
+            <q-card-actions>
               <q-btn
+                v-for="(tag, index) in tagsList" :key="index"
                 style="background: #007DDC; color: white"
                 :label=tag.label
-                :style="{backgroundColor: tag.color, color: 'white'}"
+                :style="{color: tag.color}"
+                outline
+                dense
                 disable
+                class="tagsSpacing"
               />
             </q-card-actions>
           </q-card>
@@ -60,24 +64,22 @@ export default {
   },
   methods: {
     ...mapActions('clients', [
-      'setClients'
+      'setClients',
+      'deleteClient'
     ]),
     ...mapActions('tags', [
       'setTags'
     ]),
     editClient (id) {
       this.$router.push(`/client/${id}`)
-      console.log('id do cliente', id)
-    },
-    deleteClient (id) {
-      console.log(id)
     }
-
   }
 }
 </script>
 
 <style lang="stylus">
+.tagsSpacing
+  margin: 5px
 .q-card
   width 100%
 .bigger

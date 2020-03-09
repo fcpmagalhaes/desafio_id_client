@@ -97,7 +97,8 @@ module.exports = function (ctx) {
         'QTooltip',
         'QTabs',
         'QTab',
-        'QTabPane'
+        'QTabPane',
+        'QColor'
       ],
       directives: [
         'Ripple',

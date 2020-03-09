@@ -23,7 +23,6 @@ export const addTag = ({ commit }, tag) => {
     Vue.prototype.$axios.post(`${process.env.API}/v1/tags`, tag)
       .then((res) => {
         console.log('entrei addtag')
-        setTags()
         resolve()
       })
       .catch((err) => {

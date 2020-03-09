@@ -1,17 +1,9 @@
 <template>
-  <q-page class="container q-pa-xs">
+  <q-page class="container q-ma-lg">
 
     <h3>Editar Cliente</h3>
     <q-input v-model="client.nome" float-label=" Nome" />
     <q-input v-model="client.email" type="email" float-label="Email" suffix="@email.com"/>
-
-    <div v-for="(tag, index) in tagsList" :key="index">
-        <q-btn
-          :label=tag.label
-          :style="{backgroundColor: tag.color, color: 'white'}"
-          disable
-        />
-    </div>
 
     <q-select
       multiple
@@ -19,17 +11,22 @@
       color="purple"
       float-label="Tags de Universidades"
       v-model="multipleSelect"
-      :options="tagsList"
+      :options="newTags"
     />
 
     {{multipleSelect}}
 
-    <q-btn
-      color=primary
-      label='Salvar'
-      @click="saveClient()"
-      class="saveButton"
-    />
+    <div class='row justify-center'>
+      <div class="col-md-5 col-sm-12">
+        <q-btn
+          color=primary
+          label='Salvar'
+          @click="saveClient()"
+          class="saveButton"
+        />
+
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -39,38 +36,14 @@ export default {
   name: 'EditClient',
   data () {
     return {
-      id: 5,
-      idb: this.$route.params.id,
-      newClient: {
-        nome: '',
-        email: ''
-      },
+      id: this.$route.params.id,
       multipleSelect: [],
-      listOptions: [
-        {
-          label: 'Google',
-          icon: 'email',
-          value: 1
-        },
-        {
-          label: 'Facebook',
-          icon: 'chat',
-          description: 'Enables communication',
-          value: 2
-        },
-        {
-          label: 'Twitter',
-          inset: true,
-          rightIcon: 'live_help',
-          value: 3
-        }
-      ]
+      newTags: []
     }
   },
   mounted () {
-    this.tagsList()
     this.setClient(this.id)
-    console.log('idb', this.idb)
+    this.listTags()
   },
   computed: {
     ...mapGetters('clients', [
@@ -85,14 +58,23 @@ export default {
       'setClient',
       'updateClient'
     ]),
+    listTags () {
+      this.newTags = this.tagsList.map(object => {
+        object.value = object.id
+        delete object.color
+        return object
+      })
+    },
     saveClient () {
-      this.newClient = {
-        nome: this.client.nome,
-        email: this.client.email
+      let clientPayload = {
+        id: parseInt(this.id),
+        data: {
+          nome: this.client.nome,
+          email: this.client.email
+        }
       }
-      this.updateClient(parseInt(this.$route.params.id), this.newClient)
-
-      console.log(this.newClient)
+      console.log(clientPayload)
+      this.updateClient(clientPayload)
     }
   }
 }
@@ -103,4 +85,5 @@ export default {
     margin-bottom: 15px
   .saveButton
     margin-bottom: 30px
+    float: right
 </style>

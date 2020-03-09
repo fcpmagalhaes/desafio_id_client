@@ -1,23 +1,29 @@
 <template>
-  <q-page class="container q-pa-xs">
+  <q-page class="container q-ma-lg">
 
-    <h3>Adicionar Tag Universidade</h3>
+    <h3>Adicionar Nova Tag</h3>
     <q-input v-model="newTag.label" float-label=" Título" />
-    <q-input v-model="newTag.color" float-label="Cor em Hexadecimal" />
-      <q-btn
-        color=primary
-        label='Salvar'
-        @click="saveTag()"
-        class="saveButton"
-      />
-    <h3>Universidades Cadastradas</h3>
-    <div v-for="(tag, index) in tagsList" :key="index">
+    <q-color v-model="newTag.color" popover format-model="hex" stack-label="Cor" />
+     <div class='row justify-center'>
+      <div class="col-md-5 col-sm-12">
         <q-btn
-          :label=tag.label
-          :style="{backgroundColor: tag.color, color: 'white'}"
-          disable
+          color=primary
+          label='Salvar'
+          @click="saveTag()"
+          class="saveButton"
         />
+      </div>
     </div>
+    <h3>Tags Cadastradas</h3>
+    <q-btn
+      v-for="(tag, index) in tagsList" :key="index"
+      :label=tag.label
+      :style="{color: tag.color}"
+      outline
+      dense
+      disable
+      class="tagsSpacing"
+    />
 
   </q-page>
 </template>
@@ -57,5 +63,8 @@ export default {
   .q-input
     margin-bottom: 15px
   .saveButton
-    margin-bottom: 30px
+    margin: 30px
+    float: right
+  .tagsSpacing
+    margin: 5px
 </style>
