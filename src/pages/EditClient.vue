@@ -10,11 +10,9 @@
       chips
       color="purple"
       float-label="Tags de Universidades"
-      v-model="multipleSelect"
+      v-model="tagsSelected"
       :options="newTags"
     />
-
-    {{multipleSelect}}
 
     <div class='row justify-center'>
       <div class="col-md-5 col-sm-12">
@@ -37,8 +35,8 @@ export default {
   data () {
     return {
       id: this.$route.params.id,
-      multipleSelect: [],
-      newTags: []
+      newTags: [],
+      tagsSelected: []
     }
   },
   mounted () {
@@ -47,7 +45,8 @@ export default {
   },
   computed: {
     ...mapGetters('clients', [
-      'client'
+      'client',
+      'clientTags'
     ]),
     ...mapGetters('tags', [
       'tagsList'
@@ -58,7 +57,12 @@ export default {
       'setClient',
       'updateClient'
     ]),
-    listTags () {
+    ...mapActions('tags', [
+      'setTags'
+    ]),
+    async listTags () {
+      await this.setTags()
+      this.tagsSelected = this.clientTags
       this.newTags = this.tagsList.map(object => {
         object.value = object.id
         delete object.color
@@ -70,10 +74,10 @@ export default {
         id: parseInt(this.id),
         data: {
           nome: this.client.nome,
-          email: this.client.email
+          email: this.client.email,
+          clientTags: this.tagsSelected
         }
       }
-      console.log(clientPayload)
       this.updateClient(clientPayload)
     }
   }

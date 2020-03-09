@@ -4,7 +4,8 @@ export const setClients = ({ commit }) => {
   return new Promise((resolve, reject) => {
     Vue.prototype.$axios.get(`${process.env.API}/v1/clientes`)
       .then((res) => {
-        commit('SET_CLIENTS', res.data.data)
+        const payload = adjustClientsList(res.data.data.clientes, res.data.data.tagsClientes)
+        commit('SET_CLIENTS', payload)
         resolve(res.data.data)
       })
       .catch((err) => {
@@ -18,7 +19,10 @@ export const setClient = ({ commit }, id) => {
   return new Promise((resolve, reject) => {
     Vue.prototype.$axios.get(`${process.env.API}/v1/clientes/${id}`)
       .then((res) => {
-        commit('SET_CLIENT', res.data.data)
+        const client = res.data.data.cliente
+        const clientTags = res.data.data.tagsCliente.map(c => c.id)
+        commit('SET_CLIENT', client)
+        commit('SET_CLIENT_TAGS', clientTags)
         resolve(res.data.data)
       })
       .catch((err) => {
@@ -27,6 +31,19 @@ export const setClient = ({ commit }, id) => {
       })
   })
 }
+
+const adjustClientsList = (clients, tags) => {
+  return clients.map((client) => {
+    client.tagsCliente = []
+    tags.map((tag) => {
+      if (tag.id === client.id) {
+        client.tagsCliente = tag.tagsCliente
+      }
+    })
+    return client
+  })
+}
+
 export const addClient = ({ commit }, newClient) => {
   return new Promise((resolve, reject) => {
     Vue.prototype.$axios.post(`${process.env.API}/v1/clientes/`, newClient)

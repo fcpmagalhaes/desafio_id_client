@@ -24,7 +24,7 @@
             <q-card-separator />
             <q-card-actions>
               <q-btn
-                v-for="(tag, index) in tagsList" :key="index"
+                v-for="(tag, index) in client.tagsCliente" :key="index"
                 style="background: #007DDC; color: white"
                 :label=tag.label
                 :style="{color: tag.color}"
@@ -52,23 +52,16 @@ export default {
   },
   mounted () {
     this.setClients()
-    this.setTags()
   },
   computed: {
     ...mapGetters('clients', [
       'clientsList'
-    ]),
-    ...mapGetters('tags', [
-      'tagsList'
     ])
   },
   methods: {
     ...mapActions('clients', [
       'setClients',
       'deleteClient'
-    ]),
-    ...mapActions('tags', [
-      'setTags'
     ]),
     editClient (id) {
       this.$router.push(`/client/${id}`)

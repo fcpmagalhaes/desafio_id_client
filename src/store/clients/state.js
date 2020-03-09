@@ -1,4 +1,5 @@
 export default {
   clientsList: [],
-  client: {}
+  client: {},
+  clientTags: []
 }
