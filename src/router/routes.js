@@ -4,9 +4,11 @@ const routes = [
     path: '/',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Dashboard.vue') },
-      { path: '/dashboard', component: () => import('pages/dashboard.vue') },
-      { path: '/clients', component: () => import('pages/ClientList.vue') }
+      { path: '', component: () => import('pages/ClientList.vue') },
+      { path: '/add-tag', component: () => import('pages/AddTag.vue') },
+      { path: '/list-clients', component: () => import('pages/ClientList.vue') },
+      { path: '/new-client', component: () => import('pages/AddClient.vue') },
+      { path: '/client/:id', component: () => import('pages/EditClient.vue') }
     ]
   }
 ]

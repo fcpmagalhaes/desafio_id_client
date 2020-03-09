@@ -33,13 +33,17 @@
         inset-delimiter
       >
         <q-list-header>Menu </q-list-header>
-        <q-item to="/dashboard">
-          <q-item-side icon="home" />
-          <q-item-main label="Dashboard"/>
-        </q-item>
-        <q-item to="/clients">
+        <q-item to="/list-clients">
           <q-item-side icon="list" />
-          <q-item-main label="Clientes" sublabel="Lista de Clientes" />
+          <q-item-main label="Lista de Clientes"/>
+        </q-item>
+        <q-item to="/new-client">
+          <q-item-side icon="person" />
+          <q-item-main label="Adicionar Cliente"/>
+        </q-item>
+        <q-item to="/add-tag">
+          <q-item-side icon="tag" />
+          <q-item-main label="Adicionar Tag"/>
         </q-item>
       </q-list>
     </q-layout-drawer>

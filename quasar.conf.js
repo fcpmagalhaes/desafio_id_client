@@ -19,6 +19,12 @@ module.exports = function (ctx) {
     ],
     supportIE: false,
     build: {
+      env: ctx.dev
+        ? {
+          API: JSON.stringify('http://localhost:3000/api')
+        } : {
+          API: JSON.stringify('http://localhost:3000/api')
+        },
       scopeHoisting: true,
       vueRouterMode: 'history',
       // vueCompiler: true,
